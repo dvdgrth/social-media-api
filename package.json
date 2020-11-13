@@ -19,6 +19,7 @@
   "homepage": "https://github.com/dvdgrth/social-media-api#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.10.14"
+    "mongoose": "^5.10.14",
+    "pug": "^3.0.0"
   }
 }
