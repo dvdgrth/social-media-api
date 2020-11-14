@@ -6,8 +6,10 @@ router.get("/", (req, res) => {
   //   res.send("Hello World from index");
   res.render("index", {
     title: "social-media-api",
-    message: "social-media-api",
-    input: "ewhfouwrheofieu",
+    bodyTitle: "social-media-api",
+    welcomeMessage: "Welcome to the one and only social media site",
+    users: ["user 1", "user 2", "user 3"],
+    posts: ["post 1", "post 2", "post 3"],
   });
 });
 

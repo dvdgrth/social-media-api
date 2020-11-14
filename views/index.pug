@@ -2,5 +2,17 @@ html
   head
     title= title
   body
-    h1= message
-    p test whatever #{input}
+    h1= bodyTitle
+    p= welcomeMessage
+    p
+      a(href="/api") See the api
+
+    h2 All users:
+    ul
+      each user in users
+        li= user
+    
+    h2 All posts:
+    ul
+      each post in posts
+        li= post

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>social-media-api</h1>
+
+    <h2>create new user</h2>
+    <div>
+        <div>POST</div>
+        <div>"/api/users"</div>
+        <div>json</div>
+        <div>name, email, password</div>
+    </div>
+
+    <h2>create new post</h2>
+    <div>
+        <div>POST</div>
+        <div>"/api/posts"</div>
+        <div>json</div>
+        <div>title, author, body</div>
+    </div>
+
+    <h2>get all posts</h2>
+    <div>
+        <div>GET</div>
+        <div>"/api/posts"</div>
+        <div>Accept: application/json ?</div>
+    </div>
+
+    <h2>search posts</h2>
+    <div>
+        <div>GET</div>
+        <div>"/api/posts/search?q=YOURQUERYHERE"</div>
+        <div>Accept: application/json ?</div>
+    </div>
+
+    <h2>search users</h2>
+    <div>
+        <div>GET</div>
+        <div>"/api/users/search?q=YOURQUERYHERE"</div>
+        <div>Accept: application/json ?</div>
+    </div>
+
+    <h2>comment on a post</h2>
+    <div>
+        <div>POST</div>
+        <div>"/api/posts/comments"</div>
+        <div>json</div>
+        <div>postId, author, body</div>
+    </div>
+
+    <h2>get user by id</h2>
+    <div>
+        <div>GET</div>
+        <div>"/api/users/id"</div>
+        <div>Accept: application/json ?</div>
+    </div>
+</body>
+</html>

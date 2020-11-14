@@ -10,7 +10,7 @@ app.set("view engine", "pug");
 
 DB.initConnection();
 
-app.use(express.static("public"));
+app.use(express.static("public", { extensions: ["html"] }));
 app.use("/", indexRouter);
 
 app.listen(PORT, () =>
