@@ -1,15 +1,18 @@
 const express = require("express");
+const DB = require("./../databaseInterface");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  //   res.send("Hello World from index");
+router.get("/", async (req, res) => {
+  const users = await DB.getAllUsers();
+  const posts = await DB.getAllPosts();
+
   res.render("index", {
     title: "social-media-api",
     bodyTitle: "social-media-api",
     welcomeMessage: "Welcome to the one and only social media site",
-    users: ["user 1", "user 2", "user 3"],
-    posts: ["post 1", "post 2", "post 3"],
+    users: users,
+    posts: posts,
   });
 });
 

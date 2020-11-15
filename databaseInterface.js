@@ -25,9 +25,18 @@ function createUser(name, email, password) {
     email,
     password,
   });
-
   newUser.save();
 }
 
+async function getAllPosts() {
+  return await Post.find({});
+}
+
+async function getAllUsers() {
+  return await User.find({});
+}
+
 exports.initConnection = initConnection;
-exports.createUser = initConnection;
+exports.createUser = createUser;
+exports.getAllPosts = getAllPosts;
+exports.getAllUsers = getAllUsers;
