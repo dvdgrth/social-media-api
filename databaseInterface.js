@@ -18,14 +18,23 @@ async function initConnection() {
   });
 }
 
-function createUser(name, email, password) {
+async function createUser(name, email, password) {
   // TODO: Test if user is already exists.
   const newUser = new User({
     name,
     email,
     password,
   });
-  newUser.save();
+  return await newUser.save();
+}
+
+async function createPost(title, author, body) {
+  const newPost = new Post({
+    title,
+    author,
+    body,
+  });
+  return await newPost.save();
 }
 
 async function getAllPosts() {
@@ -38,5 +47,6 @@ async function getAllUsers() {
 
 exports.initConnection = initConnection;
 exports.createUser = createUser;
+exports.createPost = createPost;
 exports.getAllPosts = getAllPosts;
 exports.getAllUsers = getAllUsers;

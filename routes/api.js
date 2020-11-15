@@ -24,4 +24,20 @@ router.get("/users", (req, res) => {
     .catch((err) => res.json({ err: err }));
 });
 
+router.post("/users", async (req, res) => {
+  const body = await req.body;
+  console.log(body);
+  const ret = await DB.createUser(body.name, body.email, body.password);
+  console.log(ret);
+  res.send("created?");
+});
+
+router.post("/posts", async (req, res) => {
+  const body = await req.body;
+  console.log(body);
+  const ret = await DB.createPost(body.title, body.author, body.body);
+  console.log(ret);
+  res.send("created?");
+});
+
 module.exports = router;
