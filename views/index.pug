@@ -9,11 +9,21 @@ html
       a(href="/api") See the api
 
     h2 All users:
-    ul
+    div(class="users-grid")
       each user in users
-        li= user
+        div(class="user-grid")
+          div name = #{user.name}
+          div email = #{user.email}
+          div password = #{user.password}
+          div id = #{user._id}
+          div posts = #{user.posts}
     
     h2 All posts:
-    ul
+    div(class="posts-grid")
       each post in posts
-        li= post
+        div(class="post-grid")
+          div title = #{post.title}
+          div author = #{post.author}
+          div date = #{post.date}
+          div body = #{post.body}
+          div id = #{post._id}

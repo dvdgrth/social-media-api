@@ -4,7 +4,9 @@ const postSchema = new mongoose.Schema({
   title: String,
   author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   body: String,
-  // comments: [{ body: String, date: Date, author: String }],
+  comments: [
+    { body: String, date: { type: Date, default: Date.now }, author: String },
+  ],
   date: { type: Date, default: Date.now },
   // rating: Number,
 });

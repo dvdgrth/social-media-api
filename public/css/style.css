@@ -1,3 +1,27 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.users-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.user-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(5, 1fr);
+  border: 1px solid black;
+}
+
+.posts-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.post-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(5, 1fr);
+  border: 1px solid black;
+}

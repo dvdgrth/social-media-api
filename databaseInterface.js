@@ -37,6 +37,12 @@ async function createPost(title, author, body) {
   return await newPost.save();
 }
 
+async function createComment(post, author, body) {
+  let p = await Post.findById(post);
+  p.comments.push({ body: body, author: author });
+  return await p.save();
+}
+
 async function getAllPosts() {
   return await Post.find({});
 }
@@ -45,8 +51,19 @@ async function getAllUsers() {
   return await User.find({});
 }
 
+async function getPostById(id) {
+  return await Post.findById(id);
+}
+
+async function getUserById(id) {
+  return await User.findById(id);
+}
+
 exports.initConnection = initConnection;
 exports.createUser = createUser;
 exports.createPost = createPost;
+exports.createComment = createComment;
 exports.getAllPosts = getAllPosts;
 exports.getAllUsers = getAllUsers;
+exports.getPostById = getPostById;
+exports.getUserById = getUserById;
