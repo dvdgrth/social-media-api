@@ -18,20 +18,20 @@ router.get("/posts/:id", async (req, res) => {
   res.json(await DB.getPostById(req.params.id));
 });
 
-router.get("/posts", (req, res) => {
-  DB.getAllPosts()
-    .then((docs) => {
-      res.json(docs);
-    })
-    .catch((err) => res.json({ err: err }));
+router.get("/posts", async (req, res) => {
+  if (req.query.q) {
+    res.json(await DB.searchPosts(req.query.q));
+  } else {
+    res.json(await DB.getAllPosts());
+  }
 });
 
-router.get("/users", (req, res) => {
-  DB.getAllUsers()
-    .then((docs) => {
-      res.json(docs);
-    })
-    .catch((err) => res.json({ err: err }));
+router.get("/users", async (req, res) => {
+  if (req.query.q) {
+    res.json(await DB.searchUsers(req.query.q));
+  } else {
+    res.json(await DB.getAllUsers());
+  }
 });
 
 router.post("/users", async (req, res) => {

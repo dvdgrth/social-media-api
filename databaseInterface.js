@@ -59,6 +59,18 @@ async function getUserById(id) {
   return await User.findById(id);
 }
 
+async function searchPosts(q) {
+  let re = new RegExp(".*" + q + ".*", "i");
+  return await Post.find({
+    $or: [{ body: re }, { title: re }],
+  });
+}
+
+async function searchUsers(q) {
+  let re = new RegExp(".*" + q + ".*", "i");
+  return await User.find({ $or: [{ name: re }, { email: re }] });
+}
+
 exports.initConnection = initConnection;
 exports.createUser = createUser;
 exports.createPost = createPost;
@@ -67,3 +79,5 @@ exports.getAllPosts = getAllPosts;
 exports.getAllUsers = getAllUsers;
 exports.getPostById = getPostById;
 exports.getUserById = getUserById;
+exports.searchPosts = searchPosts;
+exports.searchUsers = searchUsers;
