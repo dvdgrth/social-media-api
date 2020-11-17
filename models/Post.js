@@ -5,7 +5,11 @@ const postSchema = new mongoose.Schema({
   author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   body: String,
   comments: [
-    { body: String, date: { type: Date, default: Date.now }, author: String },
+    {
+      body: String,
+      date: { type: Date, default: Date.now },
+      author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    },
   ],
   date: { type: Date, default: Date.now },
   // rating: Number,
