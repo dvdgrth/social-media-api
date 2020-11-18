@@ -4,20 +4,33 @@ const DB = require("./../databaseInterface");
 
 const router = express.Router();
 
+// Api landing page.
 router.get("/", (req, res) => {
   res.sendFile("api.html", { root: path.join(__dirname, "./../views") });
 });
 
 // Get user by id.
-router.get("/users/:id", async (req, res) => {
-  res.json(await DB.getUserById(req.params.id));
+router.get("/users/:id", async (req, res, next) => {
+  try {
+    res.json(await DB.getUserById(req.params.id));
+  } catch (error) {
+    error.statusCode = 400;
+    next(error);
+  }
 });
 
 // Get post by id.
-router.get("/posts/:id", async (req, res) => {
-  res.json(await DB.getPostById(req.params.id));
+router.get("/posts/:id", async (req, res, next) => {
+  try {
+    res.json(await DB.getPostById(req.params.id));
+  } catch (error) {
+    console.log("INside catch");
+    error.statusCode = 400;
+    next(error);
+  }
 });
 
+// Get Posts.
 router.get("/posts", async (req, res) => {
   if (req.query.q) {
     res.json(await DB.searchPosts(req.query.q));
@@ -26,6 +39,7 @@ router.get("/posts", async (req, res) => {
   }
 });
 
+// Get Users.
 router.get("/users", async (req, res) => {
   if (req.query.q) {
     res.json(await DB.searchUsers(req.query.q));
@@ -34,6 +48,7 @@ router.get("/users", async (req, res) => {
   }
 });
 
+// Create User.
 router.post("/users", async (req, res) => {
   const body = await req.body;
   console.log(body);
@@ -42,6 +57,7 @@ router.post("/users", async (req, res) => {
   res.send("created?");
 });
 
+// Create Post.
 router.post("/posts", async (req, res) => {
   const body = await req.body;
   console.log(body);
@@ -50,6 +66,7 @@ router.post("/posts", async (req, res) => {
   res.send("created?");
 });
 
+// Create comment.
 router.post("/posts/comments", async (req, res) => {
   const body = await req.body;
   console.log(body);

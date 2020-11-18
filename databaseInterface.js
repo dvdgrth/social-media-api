@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("./models/User");
 const Post = require("./models/Post");
+const { use } = require("./routes/api");
 
 async function initConnection() {
   try {
