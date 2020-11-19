@@ -10,13 +10,12 @@ async function initConnection() {
       useUnifiedTopology: true,
     });
     console.log("connected I guess");
+    mongoose.connection.on("error", (error) => {
+      console.log(error);
+    });
   } catch (error) {
     console.log(error);
   }
-
-  mongoose.connection.on("error", (error) => {
-    console.log(error);
-  });
 }
 
 async function createUser(name, email, password) {

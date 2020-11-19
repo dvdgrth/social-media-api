@@ -12,7 +12,14 @@ router.get("/", (req, res) => {
 // Get user by id.
 router.get("/users/:id", async (req, res, next) => {
   try {
-    res.json(await DB.getUserById(req.params.id));
+    const ret = await DB.getUserById(req.params.id);
+    if (ret != null) {
+      res.json(ret);
+    } else {
+      let error = new Error(`Id not found. (id = ${req.params.id})`);
+      error.statusCode = 404;
+      next(error);
+    }
   } catch (error) {
     error.statusCode = 400;
     next(error);
@@ -22,57 +29,86 @@ router.get("/users/:id", async (req, res, next) => {
 // Get post by id.
 router.get("/posts/:id", async (req, res, next) => {
   try {
-    res.json(await DB.getPostById(req.params.id));
+    const ret = await DB.getPostById(req.params.id);
+    if (ret != null) {
+      res.json(ret);
+    } else {
+      let error = new Error(`Id not found. (id = ${req.params.id})`);
+      error.statusCode = 404;
+      next(error);
+    }
   } catch (error) {
-    console.log("INside catch");
     error.statusCode = 400;
     next(error);
   }
 });
 
 // Get Posts.
-router.get("/posts", async (req, res) => {
-  if (req.query.q) {
-    res.json(await DB.searchPosts(req.query.q));
-  } else {
-    res.json(await DB.getAllPosts());
+router.get("/posts", async (req, res, next) => {
+  try {
+    if (req.query.q) {
+      res.json(await DB.searchPosts(req.query.q));
+    } else {
+      res.json(await DB.getAllPosts());
+    }
+  } catch (error) {
+    next(error);
   }
 });
 
 // Get Users.
-router.get("/users", async (req, res) => {
-  if (req.query.q) {
-    res.json(await DB.searchUsers(req.query.q));
-  } else {
-    res.json(await DB.getAllUsers());
+router.get("/users", async (req, res, next) => {
+  try {
+    if (req.query.q) {
+      res.json(await DB.searchUsers(req.query.q));
+    } else {
+      res.json(await DB.getAllUsers());
+    }
+  } catch (error) {
+    next(error);
   }
 });
 
 // Create User.
-router.post("/users", async (req, res) => {
-  const body = await req.body;
-  console.log(body);
-  const ret = await DB.createUser(body.name, body.email, body.password);
-  console.log(ret);
-  res.send("created?");
+router.post("/users", async (req, res, next) => {
+  try {
+    const ret = await DB.createUser(
+      req.body.name,
+      req.body.email,
+      req.body.password
+    );
+    res.json(ret);
+  } catch (error) {
+    next(error);
+  }
 });
 
 // Create Post.
-router.post("/posts", async (req, res) => {
-  const body = await req.body;
-  console.log(body);
-  const ret = await DB.createPost(body.title, body.author, body.body);
-  console.log(ret);
-  res.send("created?");
+router.post("/posts", async (req, res, next) => {
+  try {
+    const ret = await DB.createPost(
+      req.body.title,
+      req.body.author,
+      req.body.body
+    );
+    res.json(ret);
+  } catch (error) {
+    next(error);
+  }
 });
 
 // Create comment.
-router.post("/posts/comments", async (req, res) => {
-  const body = await req.body;
-  console.log(body);
-  const ret = await DB.createComment(body.post, body.author, body.body);
-  console.log(ret);
-  res.send("created?");
+router.post("/posts/comments", async (req, res, next) => {
+  try {
+    const ret = await DB.createComment(
+      req.body.post,
+      req.body.author,
+      req.body.body
+    );
+    res.json(ret);
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;
