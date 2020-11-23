@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/dvdgrth/social-media-api#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.10.14",
     "pug": "^3.0.0"

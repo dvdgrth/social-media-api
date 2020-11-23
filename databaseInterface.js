@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("./models/User");
 const Post = require("./models/Post");
-const { use } = require("./routes/api");
+const { use, post } = require("./routes/api");
 
 async function initConnection() {
   try {
@@ -71,6 +71,14 @@ async function searchUsers(q) {
   return await User.find({ $or: [{ name: re }, { email: re }] });
 }
 
+async function deletePostById(id) {
+  return await Post.findByIdAndDelete(id);
+}
+
+async function deleteUserById(id) {
+  return await User.findByIdAndDelete(id);
+}
+
 exports.initConnection = initConnection;
 exports.createUser = createUser;
 exports.createPost = createPost;
@@ -81,3 +89,5 @@ exports.getPostById = getPostById;
 exports.getUserById = getUserById;
 exports.searchPosts = searchPosts;
 exports.searchUsers = searchUsers;
+exports.deletePostById = deletePostById;
+exports.deleteUserById = deleteUserById;

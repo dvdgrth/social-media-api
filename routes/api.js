@@ -111,4 +111,24 @@ router.post("/posts/comments", async (req, res, next) => {
   }
 });
 
+// Delete Post.
+router.delete("/posts/:id", async (req, res, next) => {
+  try {
+    const ret = await DB.deletePostById(req.params.id);
+    res.json(ret);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Delete User.
+router.delete("/users/:id", async (req, res, next) => {
+  try {
+    const ret = await DB.deleteUserById(req.params.id.trim());
+    res.json(ret);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
