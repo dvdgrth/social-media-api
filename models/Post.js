@@ -18,7 +18,10 @@ const postSchema = new mongoose.Schema({
   date: { type: Date, default: Date.now },
   // rating: Number,
 });
-postSchema.post("save", () => console.log("A new Post was saved."));
+postSchema.post("save", function (doc) {
+  console.log(`Post ${doc._id} has been saved.`);
+});
+
 const Post = mongoose.model("Post", postSchema);
 
 module.exports = Post;

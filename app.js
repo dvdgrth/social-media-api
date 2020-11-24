@@ -12,6 +12,12 @@ app.set("view engine", "pug");
 
 DB.initConnection();
 
+let simpleLogger = (req, res, next) => {
+  console.log(`${new Date().toLocaleString()}\t\t${req.method}\t\t${req.url}`);
+  next();
+};
+
+app.use(simpleLogger);
 app.use(express.static("public"));
 app.use(express.json());
 app.use(cors());

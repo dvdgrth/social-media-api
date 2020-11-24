@@ -44,7 +44,10 @@ async function createComment(post, author, body) {
 }
 
 async function getAllPosts() {
-  return await Post.find({});
+  return await Post.find({}).populate([
+    { path: "author" },
+    { path: "comments.author" },
+  ]);
 }
 
 async function getAllUsers() {
