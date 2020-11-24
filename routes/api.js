@@ -131,4 +131,13 @@ router.delete("/users/:id", async (req, res, next) => {
   }
 });
 
+// Get Post from User.
+router.get("/users/:id/posts", async (req, res, next) => {
+  try {
+    res.json(await DB.getPostsFromUser(req.params.id));
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

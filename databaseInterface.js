@@ -82,6 +82,10 @@ async function deleteUserById(id) {
   return await User.findByIdAndDelete(id);
 }
 
+async function getPostsFromUser(id) {
+  return await Post.find({ author: id });
+}
+
 exports.initConnection = initConnection;
 exports.createUser = createUser;
 exports.createPost = createPost;
@@ -94,3 +98,4 @@ exports.searchPosts = searchPosts;
 exports.searchUsers = searchUsers;
 exports.deletePostById = deletePostById;
 exports.deleteUserById = deleteUserById;
+exports.getPostsFromUser = getPostsFromUser;
