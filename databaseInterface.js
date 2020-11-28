@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const User = require("./models/User");
 const Post = require("./models/Post");
-const { use, post } = require("./routes/api");
 
 async function initConnection() {
   try {
@@ -45,13 +44,13 @@ async function createComment(post, author, body) {
 
 async function getAllPosts() {
   return await Post.find({}).populate([
-    { path: "author" },
-    { path: "comments.author" },
+    { path: "author", select: "name" },
+    { path: "comments.author", select: "name" },
   ]);
 }
 
 async function getAllUsers() {
-  return await User.find({});
+  return await User.find({}, "name");
 }
 
 async function getPostById(id) {
@@ -59,7 +58,7 @@ async function getPostById(id) {
 }
 
 async function getUserById(id) {
-  return await User.findById(id);
+  return await User.findById(id, "name");
 }
 
 async function searchPosts(q) {
@@ -71,7 +70,7 @@ async function searchPosts(q) {
 
 async function searchUsers(q) {
   let re = new RegExp(".*" + q + ".*", "i");
-  return await User.find({ $or: [{ name: re }, { email: re }] });
+  return await User.find({ $or: [{ name: re }, { email: re }] }, "name");
 }
 
 async function deletePostById(id) {
